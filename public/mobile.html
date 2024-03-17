@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mobile Controller</title>
+</head>
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <button id="playButton">Play</button>
+    <script>
+        const socket = io();
+            document.getElementById('playButton').addEventListener('click', () => {
+            socket.emit('startGame');
+        });
+
+        window.addEventListener('deviceorientation', (event) => {
+            const { alpha, beta, gamma } = event;
+            socket.emit('rotateSword', { alpha, beta, gamma });
+            //console.log({ alpha, beta, gamma });
+        });
+    </script>
+</body>
+</html>
